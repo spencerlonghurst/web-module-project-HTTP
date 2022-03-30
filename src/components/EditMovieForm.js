@@ -17,9 +17,14 @@ const EditMovieForm = (props) => {
 		description: ""
 	});
 
-	console.log(movie)
 	useEffect(() => {
-		setMovie()
+		axios.get(`http://localhost:9000/api/movies/${id}`)
+		.then(res => {
+			setMovie(res.data)
+		})
+		.catch(err => {
+			console.log(err)
+		})
 	}, [])
 	
 	const handleChange = (e) => {
@@ -34,7 +39,8 @@ const EditMovieForm = (props) => {
         axios.put(`http://localhost:9000/api/movies/${id}`, movie)
             .then(res=>{
                 setMovies(res.data);
-                push(`/movies/${movie.id}`);
+								console.log('res:', res)
+                push(`/movies/${id}`);
 			})
 			.catch(err=>{
 				console.log(err);
