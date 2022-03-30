@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const EditMovieForm = (props) => {
 	const { push } = useHistory();
+	let { id } = useParams()
 
 	const { setMovies } = props;
 	const [movie, setMovie] = useState({
@@ -15,6 +16,11 @@ const EditMovieForm = (props) => {
 		metascore: 0,
 		description: ""
 	});
+
+	console.log(movie)
+	useEffect(() => {
+		setMovie()
+	}, [])
 	
 	const handleChange = (e) => {
         setMovie({
@@ -69,7 +75,7 @@ const EditMovieForm = (props) => {
 				</div>
 				<div className="modal-footer">			    
 					<input type="submit" className="btn btn-info" value="Save"/>
-					<Link to={`/movies/1`}><input type="button" className="btn btn-default" value="Cancel"/></Link>
+					<Link to={`/movies/${id}`}><input type="button" className="btn btn-default" value="Cancel"/></Link>
 				</div>
 			</form>
 		</div>
